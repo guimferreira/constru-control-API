@@ -3,6 +3,7 @@ package com.construcontrol.construcontrol.controllers.projects;
 import com.construcontrol.construcontrol.DTO.projects.CompanyDTO;
 import com.construcontrol.construcontrol.services.projects.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CompanyController {
 
     @Operation( summary = "Create a company", description = "Method that creates a company in the database", tags = {"companies"})
     @PostMapping
-    public ResponseEntity<CompanyDTO> criarCompany(@RequestBody @Validated CompanyDTO companyDTO) {
+    public ResponseEntity<CompanyDTO> criarCompany(@Valid @RequestBody @Validated CompanyDTO companyDTO) {
         log.info("Chamando criarCompany no CompanyController com dados: {}", companyDTO);
         CompanyDTO newCompany = companyService.criarCompany(companyDTO);
         return ResponseEntity.ok(newCompany);
@@ -37,7 +38,7 @@ public class CompanyController {
 
     @Operation(summary = "Get company by id", description = "Method that returns a company registered in the database by id", tags = {"companies"})
     @GetMapping("/{id}")
-    public ResponseEntity<CompanyDTO> buscarCompanyPorId(@PathVariable long id) {
+    public ResponseEntity<CompanyDTO> buscarCompanyPorId(@Valid @PathVariable long id) {
         log.info("Chamando buscarCompanyPorId no CompanyController com id: {}", id);
         Optional<CompanyDTO> company = companyService.buscarCompanyPorId(id);
         return company.map(ResponseEntity::ok)
@@ -47,7 +48,7 @@ public class CompanyController {
 
     @Operation(summary = "Update a company", description = "Method that updates a company in the database", tags = {"companies"})
     @PatchMapping("/{id}")
-    public ResponseEntity<CompanyDTO> atualizarCompany(@PathVariable long id, @RequestBody CompanyDTO companyDTO) {
+    public ResponseEntity<CompanyDTO> atualizarCompany(@Valid @PathVariable long id, @RequestBody CompanyDTO companyDTO) {
         log.info("Chamando atualizarCompany no CompanyController com id: {} e dados: {}", id, companyDTO);
         Optional<CompanyDTO> companyAtualizado = companyService.atualizarCompany(id, companyDTO);
         return companyAtualizado.map(ResponseEntity::ok)
@@ -56,7 +57,7 @@ public class CompanyController {
 
     @Operation(summary = "Delete a company", description = "Method that deletes a company in the database", tags = {"companies"})
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarCompany(@PathVariable long id) {
+    public ResponseEntity<Void> deletarCompany(@Valid @PathVariable long id) {
         log.info("Chamando deletarCompany no CompanyController com id: {}", id);
         boolean deletado = companyService.deletarCompany(id);
         if (deletado) {

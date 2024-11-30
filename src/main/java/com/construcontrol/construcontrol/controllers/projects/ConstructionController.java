@@ -3,6 +3,7 @@ package com.construcontrol.construcontrol.controllers.projects;
 import com.construcontrol.construcontrol.DTO.projects.ConstructionDTO;
 import com.construcontrol.construcontrol.services.projects.ConstructionService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class ConstructionController {
 
     @Operation(summary = "Create a construction", description = "Method that creates a construction in the database", tags = {"constructions"})
     @PostMapping
-    public ResponseEntity<ConstructionDTO> criarConstruction(@RequestBody @Validated ConstructionDTO constructionDTO) {
+    public ResponseEntity<ConstructionDTO> criarConstruction(@Valid @RequestBody @Validated ConstructionDTO constructionDTO) {
         log.info("Chamando criarConstruction no ConstructionController com dados: {}", constructionDTO);
         ConstructionDTO newConstruction = constructionService.criarConstruction(constructionDTO);
         return ResponseEntity.ok(newConstruction);
@@ -37,7 +38,7 @@ public class ConstructionController {
 
     @Operation(summary = "Get constructions by id", description = "Method that returns a construction registered in the database by id", tags = {"constructions"})
     @GetMapping("/{id}")
-    public ResponseEntity<ConstructionDTO> buscarConstructionPorId(@PathVariable long id) {
+    public ResponseEntity<ConstructionDTO> buscarConstructionPorId(@Valid @PathVariable long id) {
         log.info("Chamando buscarConstructionPorId no ConstructionController com id: {}", id);
         Optional<ConstructionDTO> construction = constructionService.buscarConstructionPorId(id);
         return construction.map(ResponseEntity::ok)
@@ -46,7 +47,7 @@ public class ConstructionController {
 
     @Operation(summary = "Update a construction", description = "Method that updates a construction in the database", tags = {"constructions"})
     @PatchMapping("/{id}")
-    public ResponseEntity<ConstructionDTO> atualizarConstruction(@PathVariable long id, @RequestBody ConstructionDTO constructionDTO) {
+    public ResponseEntity<ConstructionDTO> atualizarConstruction(@Valid @PathVariable long id, @RequestBody ConstructionDTO constructionDTO) {
         log.info("Chamando atualizarConstruction no ConstructionController com id: {} e dados: {}", id, constructionDTO);
         Optional<ConstructionDTO> constructionAtualizado = constructionService.atualizarConstruction(id, constructionDTO);
         return constructionAtualizado.map(ResponseEntity::ok)
@@ -55,7 +56,7 @@ public class ConstructionController {
 
     @Operation(summary = "Delete an construction", description = "Method that deletes an construction in the database", tags = {"constructions"})
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarConstruction(@PathVariable long id) {
+    public ResponseEntity<Void> deletarConstruction(@Valid @PathVariable long id) {
         log.info("Chamando deletarConstruction no ConstructionController com id: {}", id);
         boolean deletado = constructionService.deletarConstruction(id);
         if (deletado) {

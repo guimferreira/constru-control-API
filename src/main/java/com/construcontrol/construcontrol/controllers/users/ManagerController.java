@@ -3,6 +3,7 @@ package com.construcontrol.construcontrol.controllers.users;
 import com.construcontrol.construcontrol.DTO.users.ManagerDTO;
 import com.construcontrol.construcontrol.services.users.ManagerService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class ManagerController {
 
     @Operation(summary = "Create a manager", description = "Method that creates a manager in the database", tags = {"managers"})
     @PostMapping
-    public ResponseEntity<ManagerDTO> criarManager(@RequestBody @Validated ManagerDTO managerDTO) {
+    public ResponseEntity<ManagerDTO> criarManager(@Valid @RequestBody @Validated ManagerDTO managerDTO) {
         log.info("Chamando criarManager no ManagerController com dados: {}", managerDTO);
         ManagerDTO newManager = managerService.criarManager(managerDTO);
         return ResponseEntity.ok(newManager);
@@ -37,7 +38,7 @@ public class ManagerController {
 
     @Operation(summary = "Get managers by id", description = "Method that returns a manager registered in the database by id", tags = {"managers"})
     @GetMapping("/{id}")
-    public ResponseEntity<ManagerDTO> buscarManagerPorId(@PathVariable long id) {
+    public ResponseEntity<ManagerDTO> buscarManagerPorId(@Valid @PathVariable long id) {
         log.info("Chamando buscarManagerPorId no ManagerController com id: {}", id);
         Optional<ManagerDTO> manager = managerService.buscarManagerPorId(id);
         return manager.map(ResponseEntity::ok)
@@ -46,7 +47,7 @@ public class ManagerController {
 
     @Operation(summary = "Update a manager", description = "Method that updates a manager in the database", tags = {"managers"})
     @PatchMapping("/{id}")
-    public ResponseEntity<ManagerDTO> atualizarManager(@PathVariable long id, @RequestBody ManagerDTO managerDTO) {
+    public ResponseEntity<ManagerDTO> atualizarManager(@Valid @PathVariable long id, @RequestBody ManagerDTO managerDTO) {
         log.info("Chamando atualizarManager no ManagerController com id: {} e dados: {}", id, managerDTO);
         Optional<ManagerDTO> managerAtualizado = managerService.atualizarManager(id, managerDTO);
         return managerAtualizado.map(ResponseEntity::ok)
@@ -55,7 +56,7 @@ public class ManagerController {
 
     @Operation(summary = "Delete an manager", description = "Method that deletes an manager in the database", tags = {"managers"})
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarManager(@PathVariable long id) {
+    public ResponseEntity<Void> deletarManager(@Valid @PathVariable long id) {
         log.info("Chamando deletarManager no ManagerController com id: {}", id);
         boolean deletado = managerService.deletarManager(id);
         if (deletado) {

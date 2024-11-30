@@ -30,7 +30,7 @@ public class AuthenticationController {
 
     @Operation(summary = "Login", description = "Method that authenticates a user in the system", tags = {"auth"})
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
+    public ResponseEntity login(@Valid @RequestBody AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.getLogin(), data.getPassword());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
@@ -40,7 +40,7 @@ public class AuthenticationController {
 
     @Operation(summary = "Register", description = "Method that registers a user in the system", tags = {"auth"})
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
+    public ResponseEntity register(@Valid @RequestBody RegisterDTO data) {
         if (this.userRepository.findByEmail(data.getLogin()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.getPassword());

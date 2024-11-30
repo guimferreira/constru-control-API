@@ -3,10 +3,10 @@ package com.construcontrol.construcontrol.controllers.projects;
 import com.construcontrol.construcontrol.DTO.projects.ApartamentDTO;
 import com.construcontrol.construcontrol.services.projects.ApartamentService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class ApartamentController {
 
     @Operation(summary = "Create an apartament", description = "Method that creates an apartament in the database", tags = {"apartaments"})
     @PostMapping
-    public ResponseEntity<ApartamentDTO> criarApartament(@RequestBody @Validated ApartamentDTO apartamentDTO) {
+    public ResponseEntity<ApartamentDTO> criarApartament(@Valid @RequestBody ApartamentDTO apartamentDTO) {
         log.info("Chamando criarApartament no ApartamentController com dados: {}", apartamentDTO);
         ApartamentDTO newApartament = apartamentService.criarApartament(apartamentDTO);
         return ResponseEntity.ok(newApartament);
@@ -37,7 +37,7 @@ public class ApartamentController {
 
     @Operation(summary = "Get apartaments by id", description = "Method that returns an apartament registered in the database by id", tags = {"apartaments"})
     @GetMapping("/{id}")
-    public ResponseEntity<ApartamentDTO> buscarApartamentPorId(@PathVariable long id) {
+    public ResponseEntity<ApartamentDTO> buscarApartamentPorId(@Valid @PathVariable long id) {
         log.info("Chamando buscarApartamentPorId no ApartamentController com id: {}", id);
         Optional<ApartamentDTO> apartament = apartamentService.buscarApartamentPorId(id);
         return apartament.map(ResponseEntity::ok)
@@ -46,7 +46,7 @@ public class ApartamentController {
 
     @Operation(summary = "Update an apartament", description = "Method that updates an apartament in the database", tags = {"apartaments"})
     @PatchMapping("/{id}")
-    public ResponseEntity<ApartamentDTO> atualizarApartament(@PathVariable long id, @RequestBody ApartamentDTO apartamentDTO) {
+    public ResponseEntity<ApartamentDTO> atualizarApartament(@Valid @PathVariable long id, @RequestBody ApartamentDTO apartamentDTO) {
         log.info("Chamando atualizarApartament no ApartamentController com id: {} e dados: {}", id, apartamentDTO);
         Optional<ApartamentDTO> apartamentAtualizado = apartamentService.atualizarApartament(id, apartamentDTO);
         return apartamentAtualizado.map(ResponseEntity::ok)
@@ -55,7 +55,7 @@ public class ApartamentController {
 
     @Operation(summary = "Delete an apartament", description = "Method that deletes an apartament in the database", tags = {"apartaments"})
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarApartament(@PathVariable long id) {
+    public ResponseEntity<Void> deletarApartament(@Valid @PathVariable long id) {
         log.info("Chamando deletarApartament no ApartamentController com id: {}", id);
         boolean deletado = apartamentService.deletarApartament(id);
         if (deletado) {
