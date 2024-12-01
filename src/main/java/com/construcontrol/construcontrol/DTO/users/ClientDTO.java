@@ -1,5 +1,6 @@
 package com.construcontrol.construcontrol.DTO.users;
 
+import com.construcontrol.construcontrol.model.domain.users.enums.MaritialStatus;
 import com.construcontrol.construcontrol.model.domain.users.enums.UserRole;
 import com.construcontrol.construcontrol.utils.ConstantsError;
 import jakarta.validation.constraints.Email;
@@ -13,13 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class UserDTO {
+public class ClientDTO {
     private long id;
 
     @NotBlank(message = ConstantsError.MESSAGE_USERNAME_BLANK)
     @Size(min = ConstantsError.USERNAME_MIN_LENGTH,
-            max = ConstantsError.USERNAME_MAX_LENGTH,
-            message = ConstantsError.MESSAGE_USERNAME_LENGTH)
+          max = ConstantsError.USERNAME_MAX_LENGTH,
+          message = ConstantsError.MESSAGE_USERNAME_LENGTH)
     private String name;
 
     @NotBlank(message = ConstantsError.MESSAGE_CPF_BLANK)
@@ -46,4 +47,6 @@ public class UserDTO {
 
     @NotNull(message = ConstantsError.MESSAGE_USER_ROLE_BLANK)
     private UserRole userRole;
+
+    private MaritialStatus maritalStatus;
 }
