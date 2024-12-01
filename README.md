@@ -106,19 +106,6 @@ Para testar as rotas, siga estas instruções:
 - PATCH: /managers/{id}
 - DELETE: /managers/{id}
 
-### Brokers:
-- GET: /brokers
-- GET: /brokers/{id}
-- POST: /brokers
-- PATCH: /brokers/{id}
-- DELETE: /brokers/{id}
-
-### Suppliers:
-- GET: /suppliers
-- GET: /suppliers/{id}
-- POST: /suppliers
-- DELETE: /suppliers/{id}
-
 ### Constructions:
 - GET: /constructions
 - GET: /constructions/{id}
@@ -136,11 +123,6 @@ Para testar as rotas, siga estas instruções:
 - GET: /apartments/{id}
 - POST: /apartments
 - DELETE: /apartments/{id}
-
-### Employees:
-- GET: /employees
-- GET: /employees/{id}
-- POST: /employees
 
 ## Exemplos de Requisições
 
@@ -171,25 +153,6 @@ Para testar as rotas, siga estas instruções:
   "email": "test@mail.com",
   "cpf": "12334567",
   "rg": "123434",
-  "address": {
-    "zipCode": "12345678",
-    "streetAddress": "Rua ABC 123",
-    "neighborhood": "Centro",
-    "city": "São Paulo",
-    "state": "SP"
-  }
-}
-```
-
-### Brokers (POST):
-```json
-{
-  "name": "Hallan P F",
-  "phone": "123456",
-  "email": "",
-  "cpf": "12334567",
-  "rg": "123434",
-  "creci": "PB5555",
   "address": {
     "zipCode": "12345678",
     "streetAddress": "Rua ABC 123",
