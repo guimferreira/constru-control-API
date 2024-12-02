@@ -37,7 +37,7 @@ public class ClientService {
             client.setId(clientDTO.getId());
             client.setName(clientDTO.getName());
             client.setCpf(clientDTO.getCpf());
-            client.setRg(client.getRg());
+            client.setRg(clientDTO.getRg());
             client.setPhone(clientDTO.getPhone());
             client.setEmail(clientDTO.getEmail());
             client.setPassword(clientDTO.getPassword());

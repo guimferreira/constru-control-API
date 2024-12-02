@@ -9,6 +9,8 @@ public final class ConstantsError {
     public static final String MESSAGE_USERNAME_LENGTH = "Nome precisa ter entre 2 a 50 caracteres";
     public static final String MESSAGE_CPF_BLANK = "CPF não pode ser nulo";
     public static final String MESSAGE_CPF_SIZE = "CPF deve conter 11 dígitos";
+    public static final String MESSAGE_RG_BLANK = "RG não pode ser nulo";
+    public static final String MESSAGE_RG_SIZE = "RG deve conter no máximo 15 dígitos";
     public static final String MESSAGE_EMAIL_BLANK = "Email não pode ser nulo";
     public static final String MESSAGE_EMAIL_FORMAT = "Formato de email inválido";
     public static final String MESSAGE_PHONE_SIZE = "Telefone deve conter 11 dígitos";
