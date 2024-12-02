@@ -44,6 +44,14 @@ public class ApartamentController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Get apartaments by Construction", description = "Method that returns an apartament registered in the database by Construction", tags = {"apartaments"})
+    @GetMapping("/{construction}")
+    public ResponseEntity<List<ApartamentDTO>> listarApartamentPorConstruction(@PathVariable String construction) {
+        log.info("Chamando listarApartamentPorConstruction no ApartamentController com constructionDTO: {}", construction);
+        List<ApartamentDTO> apartaments = apartamentService.listarApartamentPorConstruction(construction);
+        return ResponseEntity.ok(apartaments);
+    }
+
     @Operation(summary = "Update an apartament", description = "Method that updates an apartament in the database", tags = {"apartaments"})
     @PatchMapping("/{id}")
     public ResponseEntity<ApartamentDTO> atualizarApartament(@Valid @PathVariable long id, @RequestBody ApartamentDTO apartamentDTO) {

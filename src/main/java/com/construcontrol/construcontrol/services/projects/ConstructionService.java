@@ -1,8 +1,6 @@
 package com.construcontrol.construcontrol.services.projects;
 
-import com.construcontrol.construcontrol.DTO.projects.CompanyDTO;
 import com.construcontrol.construcontrol.DTO.projects.ConstructionDTO;
-import com.construcontrol.construcontrol.model.domain.projects.Company;
 import com.construcontrol.construcontrol.model.domain.projects.Construction;
 import com.construcontrol.construcontrol.repositories.projects.ConstructionRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,10 +36,8 @@ public class ConstructionService {
         return constructionRepository.findById(id).map(construction -> {
             construction.setId(constructionDTO.getId());
             construction.setConstruction(constructionDTO.getConstruction());
-            construction.setCnpj(constructionDTO.getCnpj());
             construction.setStartDate(constructionDTO.getStartDate());
             construction.setEndDate(constructionDTO.getEndDate());
-            construction.setCompany(convertToEntity(constructionDTO.getCompany()));
             return convertToDTO(constructionRepository.save(construction));
         });
     }
@@ -58,13 +54,8 @@ public class ConstructionService {
         return new ConstructionDTO(
                 construction.getId(),
                 construction.getConstruction(),
-                construction.getCnpj(),
                 construction.getStartDate(),
-                construction.getEndDate(),
-                construction.getCompany() != null ? new CompanyDTO(
-                        construction.getCompany().getId(),
-                        construction.getCompany().getCompany(),
-                        construction.getCompany().getCnpj()) :null
+                construction.getEndDate()
         );
     }
 
@@ -72,19 +63,9 @@ public class ConstructionService {
         Construction construction = new Construction();
         construction.setId(constructionDTO.getId());
         construction.setConstruction(constructionDTO.getConstruction());
-        construction.setCnpj(constructionDTO.getCnpj());
         construction.setStartDate(constructionDTO.getStartDate());
         construction.setEndDate(constructionDTO.getEndDate());
-        construction.setCompany(convertToEntity(constructionDTO.getCompany()));
         return construction;
-    }
-
-    private Company convertToEntity(CompanyDTO companyDTO) {
-        Company company = new Company();
-        company.setId(companyDTO.getId());
-        company.setCompany(company.getCompany());
-        company.setCnpj(companyDTO.getCnpj());
-        return company;
     }
 
 }

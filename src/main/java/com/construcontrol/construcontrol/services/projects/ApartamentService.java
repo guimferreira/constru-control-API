@@ -1,10 +1,8 @@
 package com.construcontrol.construcontrol.services.projects;
 
 import com.construcontrol.construcontrol.DTO.projects.ApartamentDTO;
-import com.construcontrol.construcontrol.DTO.projects.CompanyDTO;
 import com.construcontrol.construcontrol.DTO.projects.ConstructionDTO;
 import com.construcontrol.construcontrol.model.domain.projects.Apartament;
-import com.construcontrol.construcontrol.model.domain.projects.Company;
 import com.construcontrol.construcontrol.model.domain.projects.Construction;
 import com.construcontrol.construcontrol.repositories.projects.ApartamentRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +34,16 @@ public class ApartamentService {
                 .map(this::convertToDTO);
     }
 
+    public List<ApartamentDTO> listarApartamentPorConstruction(String construction) {
+        return apartamentRepository.findByConstruction(construction)
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
     public Optional<ApartamentDTO> atualizarApartament(Long id, ApartamentDTO apartamentDTO) {
         return apartamentRepository.findById(id).map(apartament -> {
-//            apartament.setConstruction(convertToEntity(apartamentDTO.getConstruction()));
+            apartament.setConstruction(convertToEntity(apartamentDTO.getConstruction()));
             apartament.setNumber(apartamentDTO.getNumber());
             apartament.setArea(apartamentDTO.getArea());
             apartament.setPrice(apartamentDTO.getPrice());
@@ -58,53 +63,36 @@ public class ApartamentService {
     private ApartamentDTO convertToDTO(Apartament apartament) {
         return new ApartamentDTO(
                 apartament.getId(),
-//                apartament.getConstruction() !=null ? new ConstructionDTO(
-//                        apartament.getConstruction().getId(),
-//                        apartament.getConstruction().getConstruction(),
-//                        apartament.getConstruction().getCnpj(),
-//                        apartament.getConstruction().getStartDate(),
-//                        apartament.getConstruction().getEndDate(),
-//                        apartament.getConstruction().getCompany() != null ? new CompanyDTO(
-//                                construction.getCompany().getId(),
-//                                construction.getCompany().getCompany(),
-//                                construction.getCompany().getCnpj()) :null) : null,
+                apartament.getConstruction() !=null ? new ConstructionDTO(
+                        apartament.getConstruction().getId(),
+                        apartament.getConstruction().getConstruction(),
+                        apartament.getConstruction().getStartDate(),
+                        apartament.getConstruction().getEndDate()) : null,
                 apartament.getNumber(),
                 apartament.getArea(),
                 apartament.getPrice(),
-                apartament.isSoldStatus(),
-                apartament.getIdClient()
+                apartament.isSoldStatus()
         );
     }
 
     private Apartament convertToEntity(ApartamentDTO apartamentDTO) {
         Apartament apartament = new Apartament();
         apartament.setId(apartamentDTO.getId());
-//        apartament.setConstruction(convertToEntity(apartamentDTO.getConstruction()));
+        apartament.setConstruction(convertToEntity(apartamentDTO.getConstruction()));
         apartament.setNumber(apartamentDTO.getNumber());
         apartament.setArea(apartamentDTO.getArea());
         apartament.setPrice(apartamentDTO.getPrice());
         apartament.setSoldStatus(apartamentDTO.isSoldStatus());
-        apartament.setIdClient(apartamentDTO.getIdClient());
         return apartament;
     }
 
-//    private Construction convertToEntity(ConstructionDTO constructionDTO) {
-//        Construction construction = new Construction();
-//        construction.setId(constructionDTO.getId());
-//        construction.setConstruction(constructionDTO.getConstruction());
-//        construction.setCnpj(constructionDTO.getCnpj());
-//        construction.setStartDate(constructionDTO.getStartDate());
-//        construction.setEndDate(constructionDTO.getEndDate());
-//        construction.setCompany((convertToEntity(constructionDTO.getCompany())));
-//        return construction;
-//    }
-//
-//    private Company convertToEntity(CompanyDTO companyDTO) {
-//        Company company = new Company();
-//        company.setId(companyDTO.getId());
-//        company.setCompany(company.getCompany());
-//        company.setCnpj(companyDTO.getCnpj());
-//        return company;
-//    }
+    private Construction convertToEntity(ConstructionDTO constructionDTO) {
+        Construction construction = new Construction();
+        construction.setId(constructionDTO.getId());
+        construction.setConstruction(constructionDTO.getConstruction());
+        construction.setStartDate(constructionDTO.getStartDate());
+        construction.setEndDate(constructionDTO.getEndDate());
+        return construction;
+    }
 
 }

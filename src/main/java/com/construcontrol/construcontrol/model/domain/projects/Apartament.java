@@ -23,7 +23,5 @@ public class Apartament {
     private double price;
     @Column(name = "sold_status", nullable = false)
     private boolean soldStatus = false;
-    @Column(name="client_id")
-    private long idClient;
 
 }

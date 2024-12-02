@@ -28,11 +28,6 @@ public class UserDTO {
             message = ConstantsError.MESSAGE_CPF_SIZE)
     private String cpf;
 
-    @Size(min = ConstantsError.RG_MIN_LENGTH,
-            max = ConstantsError.RG_MAX_LENGTH,
-            message = ConstantsError.MESSAGE_RG_SIZE)
-    private String rg;
-
     @Size(min = ConstantsError.PHONE_MIN_LENGTH, message = ConstantsError.MESSAGE_PHONE_SIZE)
     private String phone;
 

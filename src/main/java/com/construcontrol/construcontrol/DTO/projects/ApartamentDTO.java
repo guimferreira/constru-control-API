@@ -13,8 +13,12 @@ import lombok.NoArgsConstructor;
 public class ApartamentDTO {
     private long id;
 
+    @NotBlank(message = ConstantsError.MESSAGE_NAME_CONSTRUCTION_BLANK)
+    private ConstructionDTO construction;
+
     @NotBlank(message = ConstantsError.MESSAGE_NUMBER_APARTMENT_BLANK)
     private String number;
+
 
     @NotBlank(message = ConstantsError.MESSAGE_AREA_APARTMENT_BLANK)
     private double area;
@@ -23,8 +27,6 @@ public class ApartamentDTO {
     private double price;
 
     @NotNull(message = ConstantsError.MESSAGE_SOLD_STATUS_APARTMENT_BLANK)
-    private boolean soldStatus;
+    private boolean soldStatus = false;
 
-    @NotNull(message = ConstantsError.MESSAGE_ID_CLIENT_APARTMENT_BLANK)
-    private long idClient;
 }
