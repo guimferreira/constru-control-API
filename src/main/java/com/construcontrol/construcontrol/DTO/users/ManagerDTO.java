@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 @AllArgsConstructor
 @Data
@@ -23,9 +24,7 @@ public class ManagerDTO {
     private String name;
 
     @NotBlank(message = ConstantsError.MESSAGE_CPF_BLANK)
-    @Size(min = ConstantsError.CPF_LENGTH,
-            max = ConstantsError.CPF_LENGTH,
-            message = ConstantsError.MESSAGE_CPF_SIZE)
+    @CPF(message = ConstantsError.MESSAGE_CPF_SIZE)
     private String cpf;
 
     @NotBlank(message = ConstantsError.MESSAGE_RG_BLANK)
