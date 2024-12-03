@@ -3,7 +3,7 @@ package com.construcontrol.construcontrol.model.domain.projects;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Data

@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class ConstructionController {
 
     @Operation(summary = "Create a construction", description = "Method that creates a construction in the database", tags = {"constructions"})
     @PostMapping
-    public ResponseEntity<ConstructionDTO> criarConstruction(@Valid @RequestBody @Validated ConstructionDTO constructionDTO) {
+    public ResponseEntity<ConstructionDTO> criarConstruction(@Valid @RequestBody ConstructionDTO constructionDTO) {
         log.info("Chamando criarConstruction no ConstructionController com dados: {}", constructionDTO);
         ConstructionDTO newConstruction = constructionService.criarConstruction(constructionDTO);
         return ResponseEntity.ok(newConstruction);
