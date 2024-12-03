@@ -17,7 +17,16 @@ public class Company {
     private String company;
     @Column(name = "cnpj", unique = true, nullable = false, length = 14)
     private String cnpj;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+    @Column(name = "zip_code", length = 8)
+    private String cep;
+    @Column(name = "street")
+    private String logradouro;
+    @Column(name = "complement")
+    private String complemento;
+    @Column(name = "neighborhood")
+    private String bairro;
+    @Column(name = "city")
+    private String localidade;
+    @Column(name = "state")
+    private String uf;
 }

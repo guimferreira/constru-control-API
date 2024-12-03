@@ -28,9 +28,6 @@ public class User implements UserDetails {
     @Column(name = "cpf", unique = true, length = 11)
     protected String cpf;
 
-    @Column(name = "rg", unique = true)
-    protected String rg;
-
     @Column(name = "phone")
     protected String phone;
 

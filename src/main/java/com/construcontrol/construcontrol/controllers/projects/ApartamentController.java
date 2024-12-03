@@ -44,11 +44,11 @@ public class ApartamentController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Get apartaments by Construction", description = "Method that returns an apartament registered in the database by Construction", tags = {"apartaments"})
-    @GetMapping("/{construction}")
-    public ResponseEntity<List<ApartamentDTO>> listarApartamentPorConstruction(@PathVariable String construction) {
-        log.info("Chamando listarApartamentPorConstruction no ApartamentController com constructionDTO: {}", construction);
-        List<ApartamentDTO> apartaments = apartamentService.listarApartamentPorConstruction(construction);
+    @Operation(summary = "Get apartaments by Construction ID", description = "Method that returns an apartament registered in the database by Construction ID", tags = {"apartaments"})
+    @GetMapping("/construction/{constructionId}")
+    public ResponseEntity<List<ApartamentDTO>> listarApartamentPorConstruction(@PathVariable Long constructionId) {
+        log.info("Chamando listarApartamentPorConstruction no ApartamentController com constructionDTO: {}", constructionId);
+        List<ApartamentDTO> apartaments = apartamentService.listarApartamentPorConstruction(constructionId);
         return ResponseEntity.ok(apartaments);
     }
 

@@ -5,6 +5,7 @@ import com.construcontrol.construcontrol.DTO.projects.ConstructionDTO;
 import com.construcontrol.construcontrol.model.domain.projects.Apartament;
 import com.construcontrol.construcontrol.model.domain.projects.Construction;
 import com.construcontrol.construcontrol.repositories.projects.ApartamentRepository;
+import com.construcontrol.construcontrol.repositories.projects.ConstructionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class ApartamentService {
     private final ApartamentRepository apartamentRepository;
+    private final ConstructionRepository constructionRepository;
 
     public ApartamentDTO criarApartament(ApartamentDTO apartamentDTO) {
         Apartament apartament = convertToEntity(apartamentDTO);
@@ -34,8 +36,8 @@ public class ApartamentService {
                 .map(this::convertToDTO);
     }
 
-    public List<ApartamentDTO> listarApartamentPorConstruction(String construction) {
-        return apartamentRepository.findByConstruction(construction)
+    public List<ApartamentDTO> listarApartamentPorConstruction(Long constructionId) {
+        return apartamentRepository.findByConstructionId(constructionId)
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
@@ -43,7 +45,10 @@ public class ApartamentService {
 
     public Optional<ApartamentDTO> atualizarApartament(Long id, ApartamentDTO apartamentDTO) {
         return apartamentRepository.findById(id).map(apartament -> {
-            apartament.setConstruction(convertToEntity(apartamentDTO.getConstruction()));
+            Construction construction = constructionRepository.findById(apartamentDTO.getConstructionId())
+                    .orElseThrow(() -> new RuntimeException("Construction not found with ID: " + apartamentDTO.getConstructionId()));
+            apartament.setConstruction(construction);
+
             apartament.setNumber(apartamentDTO.getNumber());
             apartament.setArea(apartamentDTO.getArea());
             apartament.setPrice(apartamentDTO.getPrice());
@@ -63,11 +68,7 @@ public class ApartamentService {
     private ApartamentDTO convertToDTO(Apartament apartament) {
         return new ApartamentDTO(
                 apartament.getId(),
-                apartament.getConstruction() !=null ? new ConstructionDTO(
-                        apartament.getConstruction().getId(),
-                        apartament.getConstruction().getConstruction(),
-                        apartament.getConstruction().getStartDate(),
-                        apartament.getConstruction().getEndDate()) : null,
+                apartament.getConstruction() != null ? apartament.getConstruction().getId() : null,
                 apartament.getNumber(),
                 apartament.getArea(),
                 apartament.getPrice(),
@@ -78,7 +79,11 @@ public class ApartamentService {
     private Apartament convertToEntity(ApartamentDTO apartamentDTO) {
         Apartament apartament = new Apartament();
         apartament.setId(apartamentDTO.getId());
-        apartament.setConstruction(convertToEntity(apartamentDTO.getConstruction()));
+
+        Construction construction = constructionRepository.findById(apartamentDTO.getConstructionId())
+                .orElseThrow(() -> new RuntimeException("Construction not found with ID: " + apartamentDTO.getConstructionId()));
+        apartament.setConstruction(construction);
+
         apartament.setNumber(apartamentDTO.getNumber());
         apartament.setArea(apartamentDTO.getArea());
         apartament.setPrice(apartamentDTO.getPrice());

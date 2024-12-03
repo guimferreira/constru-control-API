@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ApartamentRepository extends JpaRepository<Apartament, Long> {
 
-    @Query("SELECT a FROM Apartament a WHERE a.construction = :construction")
-    List<Apartament> findByConstruction(@Param("construction") String construction);
+    @Query("SELECT a FROM Apartament a WHERE a.construction.id = :constructionId")
+    List<Apartament> findByConstructionId(@Param("constructionId") Long constructionId);
 
 }

@@ -20,4 +20,14 @@ public class CompanyDTO {
     @NotBlank(message = ConstantsError.MESSAGE_CNPJ_BLANK)
     @CNPJ(message = ConstantsError.MESSAGE_CNPJ)
     private String cnpj;
+
+    @NotBlank(message = ConstantsError.MESSAGE_CEP_BLANK)
+    @Size(min = 8, max = 8, message = ConstantsError.MESSAGE_CEP_SIZE)
+    private String cep;
+
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
 }

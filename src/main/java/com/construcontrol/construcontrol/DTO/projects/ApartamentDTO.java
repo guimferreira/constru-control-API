@@ -13,7 +13,7 @@ public class ApartamentDTO {
     private long id;
 
     @NotNull(message = ConstantsError.MESSAGE_NAME_CONSTRUCTION_BLANK)
-    private ConstructionDTO construction;
+    private long constructionId;
 
     @NotNull(message = ConstantsError.MESSAGE_NUMBER_APARTMENT_BLANK)
     private String number;
