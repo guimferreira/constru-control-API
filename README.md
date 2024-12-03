@@ -2,7 +2,7 @@
 ## Documentação do Projeto
 | Disciplina      | Tecnologias para BackEnd                                                                                   |
 |-----------------|------------------------------------------------------------------------------------------------------------|
-| Professora      | Rodrigo Fujioka                                                                                            |
+| Professor       | Rodrigo Fujioka                                                                                            |
 | Nome do projeto | ConstruControl                                                                                             |
 | Equipe          | Gabriel Marques, <br/>Guilherme de Medeiros Ferreira, <br/>Hallan Pedrosa Ferreira, <br/>Jhonatan Domingos |
 | Líder           | Jhonatan Domingos                                                                                          |
@@ -62,7 +62,7 @@ Para testar as rotas, siga estas instruções:
    ```json
    {
      "login": "gabrielmarques@email.com",
-     "password": "123456",
+     "password": "12345678",
      "userRole": "GESTOR"
    }
    ```
@@ -71,7 +71,7 @@ Para testar as rotas, siga estas instruções:
    ```json
    {
      "login": "gabrielmarques@email.com",
-     "password": "123456",
+     "password": "12345678",
      "userRole": "CLIENTE"
    }
    ```
@@ -80,7 +80,7 @@ Para testar as rotas, siga estas instruções:
    ```json
    {
      "login": "gabrielmarques@email.com",
-     "password": "123456"
+     "password": "12345678"
    }
    ```
 
@@ -106,41 +106,27 @@ Para testar as rotas, siga estas instruções:
 - PATCH: /managers/{id}
 - DELETE: /managers/{id}
 
-### Brokers:
-- GET: /brokers
-- GET: /brokers/{id}
-- POST: /brokers
-- PATCH: /brokers/{id}
-- DELETE: /brokers/{id}
-
-### Suppliers:
-- GET: /suppliers
-- GET: /suppliers/{id}
-- POST: /suppliers
-- DELETE: /suppliers/{id}
-
 ### Constructions:
 - GET: /constructions
 - GET: /constructions/{id}
 - POST: /constructions
+- PATCH: /constructions/{id}
 - DELETE: /constructions/{id}
 
 ### Companies:
 - GET: /companies
 - GET: /companies/{id}
 - POST: /companies
+- PATCH: /compnies/{id}
 - DELETE: /companies/{id}
 
 ### Apartments:
 - GET: /apartments
 - GET: /apartments/{id}
+- GET: /apartments/{construction}
 - POST: /apartments
+- PATCH: /apartaments/{id}
 - DELETE: /apartments/{id}
-
-### Employees:
-- GET: /employees
-- GET: /employees/{id}
-- POST: /employees
 
 ## Exemplos de Requisições
 
@@ -181,25 +167,6 @@ Para testar as rotas, siga estas instruções:
 }
 ```
 
-### Brokers (POST):
-```json
-{
-  "name": "Hallan P F",
-  "phone": "123456",
-  "email": "",
-  "cpf": "12334567",
-  "rg": "123434",
-  "creci": "PB5555",
-  "address": {
-    "zipCode": "12345678",
-    "streetAddress": "Rua ABC 123",
-    "neighborhood": "Centro",
-    "city": "São Paulo",
-    "state": "SP"
-  }
-}
-```
-
 Observe que os gestores têm acesso a todo o ecossistema da aplicação, os corretores têm acesso apenas à lista de imóveis, e os clientes não têm acesso aos endpoints, pois possuem uma área do cliente com todas as informações.
 
-Para os novos endpoints adicionados (Suppliers, Constructions, Companies, Apartments, Employees), siga o padrão de estrutura JSON semelhante aos exemplos fornecidos, adaptando os campos conforme necessário para cada entidade específica.\
+Para os novos endpoints adicionados (Constructions, Companies, Apartments), siga o padrão de estrutura JSON semelhante aos exemplos fornecidos, adaptando os campos conforme necessário para cada entidade específica.\
