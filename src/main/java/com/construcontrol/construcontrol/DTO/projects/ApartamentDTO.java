@@ -19,7 +19,6 @@ public class ApartamentDTO {
     @NotBlank(message = ConstantsError.MESSAGE_NUMBER_APARTMENT_BLANK)
     private String number;
 
-
     @NotBlank(message = ConstantsError.MESSAGE_AREA_APARTMENT_BLANK)
     private double area;
 

@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class CompanyController {
 
     @Operation( summary = "Create a company", description = "Method that creates a company in the database", tags = {"companies"})
     @PostMapping
-    public ResponseEntity<CompanyDTO> criarCompany(@Valid @RequestBody @Validated CompanyDTO companyDTO) {
+    public ResponseEntity<CompanyDTO> criarCompany(@Valid @RequestBody CompanyDTO companyDTO) {
         log.info("Chamando criarCompany no CompanyController com dados: {}", companyDTO);
         CompanyDTO newCompany = companyService.criarCompany(companyDTO);
         return ResponseEntity.ok(newCompany);

@@ -37,7 +37,6 @@ public class ManagerService {
             manager.setId(managerDTO.getId());
             manager.setName(managerDTO.getName());
             manager.setCpf(managerDTO.getCpf());
-            manager.setRg(manager.getRg());
             manager.setPhone(managerDTO.getPhone());
             manager.setEmail(managerDTO.getEmail());
             manager.setPassword(managerDTO.getPassword());
@@ -59,7 +58,6 @@ public class ManagerService {
                 manager.getId(),
                 manager.getName(),
                 manager.getCpf(),
-                manager.getRg(),
                 manager.getPhone(),
                 manager.getEmail(),
                 manager.getPassword(),
@@ -72,7 +70,6 @@ public class ManagerService {
         manager.setId(managerDTO.getId());
         manager.setName(managerDTO.getName());
         manager.setCpf(managerDTO.getCpf());
-        manager.setRg(manager.getRg());
         manager.setPhone(managerDTO.getPhone());
         manager.setEmail(managerDTO.getEmail());
         manager.setPassword(managerDTO.getPassword());

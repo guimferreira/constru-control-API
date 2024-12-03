@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 @AllArgsConstructor
 @Data
@@ -24,9 +25,7 @@ public class ClientDTO {
     private String name;
 
     @NotBlank(message = ConstantsError.MESSAGE_CPF_BLANK)
-    @Size(min = ConstantsError.CPF_LENGTH,
-            max = ConstantsError.CPF_LENGTH,
-            message = ConstantsError.MESSAGE_CPF_SIZE)
+    @CPF(message = ConstantsError.MESSAGE_CPF)
     private String cpf;
 
     @Size(min = ConstantsError.PHONE_MIN_LENGTH, message = ConstantsError.MESSAGE_PHONE_SIZE)

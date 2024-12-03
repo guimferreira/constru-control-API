@@ -34,7 +34,7 @@ public class CompanyService {
 
     public Optional<CompanyDTO> atualizarCompany(Long id, CompanyDTO companyDTO) {
         return companyRepository.findById(id).map(company -> {
-            company.setCompany(company.getCompany());
+            company.setCompany(companyDTO.getCompany());
             company.setCnpj(companyDTO.getCnpj());
             return convertToDTO(companyRepository.save(company));
         });
@@ -59,7 +59,7 @@ public class CompanyService {
     private Company convertToEntity(CompanyDTO companyDTO) {
         Company company = new Company();
         company.setId(companyDTO.getId());
-        company.setCompany(company.getCompany());
+        company.setCompany(companyDTO.getCompany());
         company.setCnpj(companyDTO.getCnpj());
         return company;
     }

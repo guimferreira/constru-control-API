@@ -2,6 +2,7 @@ package com.construcontrol.construcontrol.model.domain.projects;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 @Data
 @Entity
