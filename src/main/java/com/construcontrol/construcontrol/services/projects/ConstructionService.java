@@ -34,7 +34,6 @@ public class ConstructionService {
 
     public Optional<ConstructionDTO> atualizarConstruction(Long id, ConstructionDTO constructionDTO) {
         return constructionRepository.findById(id).map(construction -> {
-            construction.setId(constructionDTO.getId());
             construction.setConstruction(constructionDTO.getConstruction());
             construction.setStartDate(constructionDTO.getStartDate());
             construction.setEndDate(constructionDTO.getEndDate());

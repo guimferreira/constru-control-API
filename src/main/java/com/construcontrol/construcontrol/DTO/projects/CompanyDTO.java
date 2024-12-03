@@ -2,6 +2,7 @@ package com.construcontrol.construcontrol.DTO.projects;
 
 import com.construcontrol.construcontrol.utils.ConstantsError;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,6 @@ public class CompanyDTO {
     private String company;
 
     @NotBlank(message = ConstantsError.MESSAGE_CNPJ_BLANK)
-    @CNPJ(message = ConstantsError.MESSAGE_CNPJ_SIZE)
+    @CNPJ(message = ConstantsError.MESSAGE_CNPJ)
     private String cnpj;
 }

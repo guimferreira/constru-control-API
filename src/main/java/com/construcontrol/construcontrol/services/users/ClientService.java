@@ -60,7 +60,6 @@ public class ClientService {
                 client.getId(),
                 client.getName(),
                 client.getCpf(),
-                client.getRg(),
                 client.getPhone(),
                 client.getEmail(),
                 client.getPassword(),

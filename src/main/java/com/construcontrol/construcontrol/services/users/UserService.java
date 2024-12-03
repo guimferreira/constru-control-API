@@ -37,7 +37,6 @@ public class UserService {
             user.setId(userDTO.getId());
             user.setName(userDTO.getName());
             user.setCpf(userDTO.getCpf());
-            user.setRg(user.getRg());
             user.setPhone(userDTO.getPhone());
             user.setEmail(userDTO.getEmail());
             user.setPassword(userDTO.getPassword());
@@ -59,7 +58,6 @@ public class UserService {
                 user.getId(),
                 user.getName(),
                 user.getCpf(),
-                user.getRg(),
                 user.getPhone(),
                 user.getEmail(),
                 user.getPassword(),
@@ -72,7 +70,6 @@ public class UserService {
         user.setId(userDTO.getId());
         user.setName(userDTO.getName());
         user.setCpf(userDTO.getCpf());
-        user.setRg(user.getRg());
         user.setPhone(userDTO.getPhone());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
